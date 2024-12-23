@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nom": "Jean Dupont",
+      "email": "jean.dupont@example.com",
+      "mdp": "password123",
+      "date_derniere_cnx": "2024-12-23T15:30:00",
+      "statut_actif": true,
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "nom": "Marie Curie",
+      "email": "marie.curie@example.com",
+      "mdp": "securePass456",
+      "date_derniere_cnx": "2024-12-22T10:15:00",
+      "statut_actif": false,
+      "role": "Intervenant"
+    }
+  ]
+}
+  

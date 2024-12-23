@@ -1,0 +1,16 @@
+{
+  "postes": [
+    {
+      "id": 1,
+      "configuration": "Core i5, 8GB RAM, 256GB SSD",
+      "utilisateurAffecte": null,
+      "etat": "EN_FONCTION"
+    },
+    {
+      "id": 2,
+      "configuration": "Core i7, 16GB RAM, 512GB SSD",
+      "utilisateurAffecte": null,
+      "etat": "EN_MAINTENANCE"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "ticket": [
+    {
+      "id": 1,
+      "titre": "Problème de connexion réseau",
+      "description": "Impossible de se connecter au réseau de l'entreprise depuis le poste 101.",
+      "dateHeureCreation": "12/12/2024 12:00:00",
+      "dateHeureMiseAJour": "12/12/2024 12:00:00",
+      "typeDemande": "Incident",
+      "impact": "BLOQUER",
+      "etatTicket": "Ouvert",
+      "utilisateur_createur": {
+        "id": 1,
+        "nom": "Jean Dupont",
+        "email": "jean.dupont@example.com",
+        "mdp": "password123",
+        "date_derniere_cnx": "2024-12-23T15:30:00",
+        "statut_actif": true,
+        "role": "ADMIN"
+        },
+      "poste_info": {
+        "id": 1,
+        "configuration": "Core i5, 8GB RAM, 256GB SSD",
+        "etat": "EN_FONCTION",
+        "utilisateurAffecte": {
+          "id": 1,
+          "nom": "Jean Dupont",
+          "email": "jean.dupont@example.com",
+          "mdp": "password123",
+          "date_derniere_cnx": "2024-12-23T15:30:00",
+          "statut_actif": true,
+          "role": "ADMIN"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "titre": "Poste cassé",
+      "description": "Poste tombé par terre",
+      "dateHeureCreation": "19/12/2024 12:00:00",
+      "dateHeureMiseAJour": "19/12/2024 12:00:00",
+      "typeDemande": "Incident",
+      "impact": "BLOQUER",
+      "etatTicket": "Ouvert",
+      "utilisateur_createur": {
+        "id": 2,
+        "nom": "Marie Curie",
+        "email": "marie.curie@example.com",
+        "mdp": "securePass456",
+        "date_derniere_cnx": "2024-12-22T10:15:00",
+        "statut_actif": false,
+        "role": "Intervenant"
+      },
+      "poste_info": {
+        "id": 2,
+        "configuration": "Core i7, 16GB RAM, 512GB SSD",
+        "etat": "EN_MAINTENANCE",
+        "utilisateurAffecte": {
+          "id": 2,
+          "nom": "Marie Curie",
+          "email": "marie.curie@example.com",
+          "mdp": "securePass456",
+          "date_derniere_cnx": "2024-12-22T10:15:00",
+          "statut_actif": false,
+          "role": "Intervenant"
+        }
+      }
+    }
+  ]
+}
+
