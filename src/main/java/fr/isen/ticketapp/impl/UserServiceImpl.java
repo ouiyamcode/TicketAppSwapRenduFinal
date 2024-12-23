@@ -5,26 +5,32 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.isen.ticketapp.interfaces.models.Services.UtilisateurService;
 import fr.isen.ticketapp.interfaces.models.Utilisateur;
+import io.agroal.api.AgroalDataSource;
+import jakarta.enterprise.inject.spi.CDI;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UtilisateurService {
+    String datasourceType = "bdd"; // ou mettre "json" ici pour changer ("json" ou "bdd")
 
+    AgroalDataSource dataSource = CDI.current().select(AgroalDataSource.class).get();
     private static final String FILE_PATH = "src/main/resources/user.json";
 
     @Override
     public Utilisateur creerUtilisateur(Utilisateur utilisateur) {
-        if (utilisateur == null) {
-            System.err.println("Erreur : L'utilisateur reçu est null.");
-            return null;
+        if (datasourceType.equals("json")) {
+            if (utilisateur == null) {
+                System.err.println("Erreur : L'utilisateur reçu est null.");
+                return null;
+            }
+            System.out.println("Utilisateur créé :");
+            System.out.println("ID : " + utilisateur.getId());
+            System.out.println("Nom : " + utilisateur.getNom());
+            System.out.println("Email : " + utilisateur.getEmail());
+            return utilisateur;
         }
-        System.out.println("Utilisateur créé :");
-        System.out.println("ID : " + utilisateur.getId());
-        System.out.println("Nom : " + utilisateur.getNom());
-        System.out.println("Email : " + utilisateur.getEmail());
-        return utilisateur;
     }
 
     @Override
