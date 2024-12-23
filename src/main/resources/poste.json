@@ -3,13 +3,29 @@
     {
       "id": 1,
       "configuration": "Core i5, 8GB RAM, 256GB SSD",
-      "utilisateurAffecte": null,
+      "utilisateurAffecte": {
+        "id": 1,
+        "nom": "Jean Dupont",
+        "email": "jean.dupont@example.com",
+        "mdp": "password123",
+        "role": "ADMIN",
+        "date_derniere_cnx": "2024-12-23 15:30:00",
+        "statut_actif": true
+      },
       "etat": "EN_FONCTION"
     },
     {
       "id": 2,
       "configuration": "Core i7, 16GB RAM, 512GB SSD",
-      "utilisateurAffecte": null,
+      "utilisateurAffecte": {
+        "id": 2,
+        "nom": "Marie Curie",
+        "email": "marie.curie@example.com",
+        "mdp": "securePass456",
+        "role": "Intervenant",
+        "date_derniere_cnx": "2024-12-22 10:15:00",
+        "statut_actif": false
+      },
       "etat": "EN_MAINTENANCE"
     }
   ]
