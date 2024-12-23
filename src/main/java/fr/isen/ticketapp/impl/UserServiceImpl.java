@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UtilisateurService {
-    String datasourceType = "bdd"; // ou mettre "json" ici pour changer ("json" ou "bdd")
+    String datasourceType = "json"; // ou mettre "json" ici pour changer ("json" ou "bdd")
 
     AgroalDataSource dataSource = CDI.current().select(AgroalDataSource.class).get();
     private static final String FILE_PATH = "src/main/resources/user.json";

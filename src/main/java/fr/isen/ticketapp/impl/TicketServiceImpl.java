@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 
 public class TicketServiceImpl implements TicketService{
-    String datasourceType = "bdd"; // ou mettre "json" ici pour changer ("json" ou "bdd")
+    String datasourceType = "json"; // ou mettre "json" ici pour changer ("json" ou "bdd")
 
     AgroalDataSource dataSource = CDI.current().select(AgroalDataSource.class).get();
 
