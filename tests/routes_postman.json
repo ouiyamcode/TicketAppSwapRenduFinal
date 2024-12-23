@@ -183,7 +183,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 7,\n    \"configuration\": \"Core i7, 16GB RAM, 512GB SSD\",\n    \"utilisateurAffecte\": {\n    \"id\": 4,\n    \"nom\": \"Isaac Newton\",\n    \"email\": \"isaac.newton@example.com\",\n    \"mdp\": \"gravityRules\",\n    \"date_derniere_cnx\": \"2024-12-23T08:45:00\",\n    \"statut_actif\": true,\n    \"role\": \"Intervenant\"\n  },\n    \"etat\": \"EN_MAINTENANCE\"\n}",
+					"raw": "{\n    \"id\": 5,\n    \"configuration\": \"Core i7, 16GB RAM, 512GB SSD\",\n    \"utilisateurAffecte\": {\n    \"id\": 4,\n    \"nom\": \"Isaac Newton\",\n    \"email\": \"isaac.newton@example.com\",\n    \"mdp\": \"gravityRules\",\n    \"date_derniere_cnx\": \"2024-12-23T08:45:00\",\n    \"statut_actif\": true,\n    \"role\": \"Intervenant\"\n  },\n    \"etat\": \"EN_MAINTENANCE\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
