@@ -1,6 +1,5 @@
 package fr.isen.ticketapp.impl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.isen.ticketapp.interfaces.models.PosteInformatique;
@@ -37,9 +36,9 @@ public class TicketServiceImpl implements TicketService{
         if (datasourceType.equals("json")) {
             if (Ticket == null) {
                 System.err.println("Erreur : Le ticket reçu est null.");
-                return null; // Retourne null en cas de paramètre invalide
+                return null;
             }
-            // Afficher les informations du ticket pour confirmation
+
             System.out.println("Ticket créé :");
             System.out.println("ID : " + Ticket.getId());
             System.out.println("Titre : " + Ticket.getTitre());
@@ -54,7 +53,8 @@ public class TicketServiceImpl implements TicketService{
 
             // Retourne le ticket
             return Ticket;
-        } else {
+        }
+        else {
             if (Ticket == null) {
                 System.err.println("Erreur : Le ticket reçu est null.");
                 return null; // Retourne null en cas de paramètre invalide
@@ -246,9 +246,11 @@ public class TicketServiceImpl implements TicketService{
                     int impactValue = rs.getInt("impact");
                     if (impactValue == 0) {
                         ticketModel.setImpact(IMPACT.BLOQUER);
-                    } else if (impactValue == 1) {
+                    }
+                    else if (impactValue == 1) {
                         ticketModel.setImpact(IMPACT.MAJEUR);
-                    } else {
+                    }
+                    else {
                         ticketModel.setImpact(IMPACT.MINEUR);
                     }
 
@@ -432,7 +434,8 @@ public class TicketServiceImpl implements TicketService{
             }
             System.err.println("Ticket non trouvé pour l'ID : " + ticketParam.getId());
             return null;
-        } else {
+        }
+        else {
             if (ticketParam == null || ticketParam.getId() == null) {
                 System.err.println("Erreur : Le ticket passé en paramètre est null ou ne contient pas d'ID.");
                 return null;
@@ -516,7 +519,8 @@ public class TicketServiceImpl implements TicketService{
 
                 if (lignesModifiees > 0) {
                     System.out.println("Ticket mis à jour avec succès dans la base de données.");
-                } else {
+                }
+                else {
                     System.err.println("Erreur : Aucun ticket mis à jour. ID non trouvé.");
                     conn.rollback();
                     return null;
@@ -551,7 +555,8 @@ public class TicketServiceImpl implements TicketService{
             }
             System.err.println("Ticket non trouvé pour l'ID : " + ticketParam.getId());
             return false;
-        } else {
+        }
+        else {
             if (ticketParam == null || ticketParam.getId() == null) {
                 System.err.println("Erreur : Le ticket passé en paramètre est null ou ne contient pas d'ID.");
                 return false;
@@ -575,7 +580,8 @@ public class TicketServiceImpl implements TicketService{
                 if (lignesSupprimees > 0) {
                     System.out.println("Ticket supprimé avec succès de la base de données.");
                     return true;
-                } else {
+                }
+                else {
                     System.err.println("Erreur : Aucun ticket trouvé pour l'ID : " + ticketParam.getId());
                     return false;
                 }

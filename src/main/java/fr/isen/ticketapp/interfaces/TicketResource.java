@@ -9,7 +9,6 @@ import fr.isen.ticketapp.interfaces.models.enums.etatTicket;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.Ticket;
 
 import java.util.List;
 

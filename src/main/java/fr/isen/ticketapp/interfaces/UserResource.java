@@ -2,7 +2,6 @@ package fr.isen.ticketapp.interfaces;
 
 import fr.isen.ticketapp.impl.UserServiceImpl;
 import fr.isen.ticketapp.interfaces.models.Utilisateur;
-import org.acme.JsonReader;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
