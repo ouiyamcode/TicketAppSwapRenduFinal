@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "da06f4e4-4b58-4bba-aae6-cade7b0e65ca",
+		"name": "Postes Informatique",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31182037"
+	},
+	"item": [
+		{
+			"name": "AfficherPostes()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/postes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AfficherUnPoste()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/postes/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreerPoste()",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 5,\n    \"configuration\": \"Core i7, 16GB RAM, 512GB SSD\",\n    \"utilisateurAffecte\": {\n    \"id\": 4,\n    \"nom\": \"Isaac Newton\",\n    \"email\": \"isaac.newton@example.com\",\n    \"mdp\": \"gravityRules\",\n    \"date_derniere_cnx\": \"2024-12-23T08:45:00\",\n    \"statut_actif\": true,\n    \"role\": \"Intervenant\"\n  },\n    \"etat\": \"EN_MAINTENANCE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/postes/creer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postes",
+						"creer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModifierPoste()",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"configuration\": \"Core i7, 16GB RAM, 512GB SSD\",\n    \"utilisateurAffecte\": {\n    \"id\": 4,\n    \"nom\": \"Isaac Newton\",\n    \"email\": \"isaac.newton@example.com\",\n    \"mdp\": \"gravityRules\",\n    \"date_derniere_cnx\": \"2024-12-23T08:45:00\",\n    \"statut_actif\": false,\n    \"role\": \"Intervenant\"\n  },\n    \"etat\": \"EN_MAINTENANCE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/postes/modifier",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postes",
+						"modifier"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SupprimerPoste()",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"configuration\": \"Core i7, 16GB RAM, 512GB SSD\",\n    \"utilisateurAffecte\": {\n    \"id\": 4,\n    \"nom\": \"Isaac Newton\",\n    \"email\": \"isaac.newton@example.com\",\n    \"mdp\": \"gravityRules\",\n    \"date_derniere_cnx\": \"2024-12-23T08:45:00\",\n    \"statut_actif\": false,\n    \"role\": \"Intervenant\"\n  },\n    \"etat\": \"EN_MAINTENANCE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/postes/supprimer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postes",
+						"supprimer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

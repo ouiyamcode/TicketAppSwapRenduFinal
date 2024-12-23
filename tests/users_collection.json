@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "28e18eb1-2a0f-4d84-b9fc-a108bd7cfb6c",
+		"name": "Utilisateurs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31182037"
+	},
+	"item": [
+		{
+			"name": "AfficherUsers()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AfficherUnUser()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AjouterUnUtilisateur()",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 5,\n    \"nom\": \"Louis Pivot\",\n    \"email\": \"louis.pivot@example.com\",\n    \"mdp\": \"louloulepivot\",\n    \"date_derniere_cnx\": \"2024-12-22T10:15:00\",\n    \"statut_actif\": false,\n    \"role\": \"Utilisateur\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/creer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"creer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModifierUtilisateur()",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"nom\": \"Marie Carie\",\n    \"email\": \"marie.carie@example.com\",\n    \"mdp\": \"securePass456\",\n    \"date_derniere_cnx\": \"2024-12-22T10:15:00\",\n    \"statut_actif\": false,\n    \"role\": \"Intervenant\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/modifier",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"modifier"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SupprimerUtilisateur()",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"nom\": \"Jean Dupont\",\n    \"email\": \"jean.dupont@example.com\",\n    \"mdp\": \"password123\",\n    \"date_derniere_cnx\": \"2024-12-23T15:30:00\",\n    \"statut_actif\": true,\n    \"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/supprimer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"supprimer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
