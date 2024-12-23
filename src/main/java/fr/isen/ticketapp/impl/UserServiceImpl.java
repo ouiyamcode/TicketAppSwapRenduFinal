@@ -80,20 +80,64 @@ public class UserServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur AfficherUnUtilisateur(Utilisateur utilisateurParam) {
-        if (utilisateurParam == null || utilisateurParam.getId() == 0) {
-            System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+        if(datasourceType.equals("json")) {
+            if (utilisateurParam == null || utilisateurParam.getId() == 0) {
+                System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+                return null;
+            }
+
+            List<Utilisateur> utilisateurs = AfficherUtilisateur();
+            for (Utilisateur utilisateur : utilisateurs) {
+                if (utilisateur.getId().equals(utilisateurParam.getId())) {
+                    return utilisateur;
+                }
+            }
+
+            System.err.println("Utilisateur non trouvé pour l'ID : " + utilisateurParam.getId());
             return null;
         }
+        else {
+            Utilisateur utilisateur = null;
+            Connection conn = null;
+            try {
+                conn = dataSource.getConnection();
 
-        List<Utilisateur> utilisateurs = AfficherUtilisateur();
-        for (Utilisateur utilisateur : utilisateurs) {
-            if (utilisateur.getId().equals(utilisateurParam.getId())) {
-                return utilisateur;
+                // Requête pour récupérer les informations d'un utilisateur spécifique
+                PreparedStatement stmt = conn.prepareStatement(
+                        "SELECT u.id AS utilisateur_id, u.nom AS utilisateur_nom, u.email AS utilisateur_email, " +
+                                "u.mdp AS utilisateur_mdp, u.date_derniere_cnx AS utilisateur_date_derniere_cnx, " +
+                                "u.statut_actif AS utilisateur_statut_actif, u.role AS utilisateur_role " +
+                                "FROM utilisateur u " +
+                                "WHERE u.id = ?"
+                );
+
+                stmt.setInt(1, utilisateurParam.getId());
+                ResultSet rs = stmt.executeQuery();
+
+                if (rs.next()) {
+                    // Construire l'objet Utilisateur
+                    utilisateur = new Utilisateur();
+                    utilisateur.setId(rs.getInt("utilisateur_id"));
+                    utilisateur.setNom(rs.getString("utilisateur_nom"));
+                    utilisateur.setEmail(rs.getString("utilisateur_email"));
+                    utilisateur.setMdp(rs.getString("utilisateur_mdp"));
+                    utilisateur.setDateDerniereCnx(rs.getString("utilisateur_date_derniere_cnx"));
+                    utilisateur.setStatutActif(rs.getBoolean("utilisateur_statut_actif"));
+                    utilisateur.setRole(Role.valueOf(rs.getString("utilisateur_role")));
+                }
+
+                stmt.close();
+                conn.close();
+
+            } catch (SQLException e) {
+                throw new RuntimeException("Erreur lors de la récupération des informations de l'utilisateur", e);
             }
+
+            return utilisateur;
         }
 
-        System.err.println("Utilisateur non trouvé pour l'ID : " + utilisateurParam.getId());
-        return null;
+
+
     }
 
     @Override
@@ -171,41 +215,123 @@ public class UserServiceImpl implements UtilisateurService {
 
     @Override
     public boolean SupprimerUtilisateur(Utilisateur utilisateurParam) {
-        if (utilisateurParam == null || utilisateurParam.getId() == 0) {
-            System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+        if (datasourceType.equals("json")) {
+            if (utilisateurParam == null || utilisateurParam.getId() == 0) {
+                System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+                return false;
+            }
+
+            List<Utilisateur> utilisateurs = AfficherUtilisateur();
+            for (Utilisateur utilisateur : utilisateurs) {
+                if (utilisateur.getId() == utilisateurParam.getId()) {
+                    utilisateurs.remove(utilisateur);
+                    System.out.println("Utilisateur supprimé : " + utilisateur.getNom());
+                    return true;
+                }
+            }
+
+            System.err.println("Utilisateur non trouvé pour l'ID : " + utilisateurParam.getId());
             return false;
         }
+        else {
+            if (utilisateurParam == null || utilisateurParam.getId() == 0) {
+                System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+                return false;
+            }
 
-        List<Utilisateur> utilisateurs = AfficherUtilisateur();
-        for (Utilisateur utilisateur : utilisateurs) {
-            if (utilisateur.getId() == utilisateurParam.getId()) {
-                utilisateurs.remove(utilisateur);
-                System.out.println("Utilisateur supprimé : " + utilisateur.getNom());
-                return true;
+            Connection conn = null;
+            try {
+                conn = dataSource.getConnection();
+
+                // Supprimer uniquement l'utilisateur
+                PreparedStatement userStmt = conn.prepareStatement(
+                        "DELETE FROM utilisateur WHERE id = ?"
+                );
+                userStmt.setInt(1, utilisateurParam.getId());
+
+                int lignesSupprimees = userStmt.executeUpdate();
+
+                userStmt.close();
+                conn.close();
+
+                if (lignesSupprimees > 0) {
+                    System.out.println("Utilisateur supprimé avec succès de la base de données.");
+                    return true;
+                } else {
+                    System.err.println("Erreur : Aucun utilisateur trouvé pour l'ID : " + utilisateurParam.getId());
+                    return false;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException("Erreur lors de la suppression de l'utilisateur dans la base de données", e);
             }
         }
 
-        System.err.println("Utilisateur non trouvé pour l'ID : " + utilisateurParam.getId());
-        return false;
+
     }
 
     @Override
     public Utilisateur ModifierUtilisateur(Utilisateur utilisateurParam) {
-        if (utilisateurParam == null || utilisateurParam.getId() == 0) {
-            System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+        if (datasourceType.equals("json")) {
+            if (utilisateurParam == null || utilisateurParam.getId() == 0) {
+                System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID.");
+                return null;
+            }
+
+            List<Utilisateur> utilisateurs = AfficherUtilisateur();
+            for (Utilisateur utilisateur : utilisateurs) {
+                if (utilisateur.getId().equals(utilisateurParam.getId())) {
+                    utilisateur = utilisateurParam;
+                    System.out.println("Utilisateur modifié : " + utilisateur.getNom());
+                    return utilisateur;
+                }
+            }
+
+            System.err.println("Utilisateur non trouvé pour l'ID : " + utilisateurParam.getId());
             return null;
         }
-
-        List<Utilisateur> utilisateurs = AfficherUtilisateur();
-        for (Utilisateur utilisateur : utilisateurs) {
-            if (utilisateur.getId().equals(utilisateurParam.getId())) {
-                utilisateur = utilisateurParam;
-                System.out.println("Utilisateur modifié : " + utilisateur.getNom());
-                return utilisateur;
+        else {
+            if (utilisateurParam == null || utilisateurParam.getId() == 0) {
+                System.err.println("Erreur : L'utilisateur passé en paramètre est null ou ne contient pas d'ID valide.");
+                return null;
             }
+            Connection conn = null;
+            try {
+                conn = dataSource.getConnection();
+                conn.setAutoCommit(false); // Démarre une transaction
+
+                // Mise à jour de l'utilisateur
+                PreparedStatement userStmt = conn.prepareStatement(
+                        "UPDATE utilisateur SET nom = ?, email = ?, mdp = ?, date_derniere_cnx = ?, statut_actif = ?, role = ? WHERE id = ?"
+                );
+                userStmt.setString(1, utilisateurParam.getNom());
+                userStmt.setString(2, utilisateurParam.getEmail());
+                userStmt.setString(3, utilisateurParam.getMdp());
+                userStmt.setString(4, utilisateurParam.getDateDerniereCnx());
+                userStmt.setBoolean(5, utilisateurParam.isStatutActif());
+                userStmt.setString(6, utilisateurParam.getRole().name());
+                userStmt.setInt(7, utilisateurParam.getId());
+
+                int lignesModifiees = userStmt.executeUpdate();
+
+                if (lignesModifiees > 0) {
+                    System.out.println("Utilisateur mis à jour avec succès dans la base de données.");
+                } else {
+                    System.err.println("Erreur : Aucun utilisateur mis à jour. ID non trouvé.");
+                    conn.rollback();
+                    return null;
+                }
+
+                userStmt.close();
+                conn.commit(); // Valider la transaction
+                conn.close();
+
+            } catch (SQLException e) {
+                throw new RuntimeException("Erreur lors de la mise à jour de l'utilisateur", e);
+            }
+
+            return utilisateurParam; // Retourne l'utilisateur mis à jour
         }
 
-        System.err.println("Utilisateur non trouvé pour l'ID : " + utilisateurParam.getId());
-        return null;
+
     }
 }
